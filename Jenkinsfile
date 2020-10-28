@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Initialize') {
             steps {
-                sh '''
+                bat '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                 '''
@@ -18,11 +18,11 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn compile'
+                bat 'mvn compile'
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }}}
