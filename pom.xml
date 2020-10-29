@@ -18,6 +18,17 @@
     <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
 
+  <distributionManagement>
+    <snapshotRepository>
+      <id>myapp_snapshot</id>
+      <url>http://localhost:8081/nexus/content/repositories/myapp_snapshot/</url>
+    </snapshotRepository>
+    <repository>
+      <id>myapp_realease</id>
+      <url>http://localhost:8081/nexus/content/repositories/myapp_realease/</url>
+    </repository>
+  </distributionManagement>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
