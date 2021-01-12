@@ -25,4 +25,39 @@ pipeline {
             steps {
                 bat 'mvn test'
             }
-        }}}
+        }
+        stage('Deploy') {
+            steps {
+                //withMaven(mavenSettingsConfig: 'maven-config', globalMavenSettingsConfig: 'global-config') {
+                    sh "mvn  -s C:/Users/Paul Chaigneau/.m2/settings.xml deploy"
+                //}
+            }
+        }
+        stage('Release') {
+            when { expression {  params['Perform release ?']} }
+            steps {
+                script{
+                    pom = readMavenPom file: 'pom.xml'
+                }
+                withCredentials([usernamePassword(credentialsId: 'chaigneauP', passwordVariable: 'PASSWORD_VAR', usernameVariable: 'USERNAME_VAR')]){
+                    //withMaven(mavenSettingsConfig: 'maven-config', globalMavenSettingsConfig: 'global-config') {
+                        sh 'git config --global user.email "chaigneaupaul@gmail.com"'
+                        sh 'git config --global user.name "chaigneauP"'
+                        sh 'git branch release/'+pom.version.replace("-SNAPSHOT","")
+                        sh 'git push origin release/'+pom.version.replace("-SNAPSHOT","")
+                        sh 'mvn release:prepare -s -B -Dusername=$USERNAME_VAR -Dpassword=$PASSWORD_VAR'
+                        sh 'mvn release:perform -s -B -Dusername=$USERNAME_VAR -Dpassword=$PASSWORD_VAR'
+                    //}
+                }
+            }
+        }
+        stage('Sonar') {
+        //sonar login : admin, psswd : admin, Jenkins-Auth-Token 9dfa1812223d38162b080d5a26f797267ab0859d
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'chaigneauP', passwordVariable: 'PASSWORD_VAR', usernameVariable: 'USERNAME_VAR')]) {
+                    sh "mvn  -s C:/Users/Paul Chaigneau/.m2/settings.xml sonar:sonar -Dsonar.login=admin -Dsonar.password=admin"
+                }
+            }
+        }
+    }
+}
