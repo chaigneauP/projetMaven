@@ -44,9 +44,8 @@ pipeline {
                     //withMaven(mavenSettingsConfig: 'maven-config', globalMavenSettingsConfig: 'global-config') {
                         bat 'git config --global user.email "chaigneaupaul@gmail.com"'
                         bat 'git config --global user.name "chaigneauP"'
-                        //bat 'git branch release/'+pom.version.replace("-SNAPSHOT","")
-                        bat 'git commit -m "initial commit"'
-                        bat 'git push origin release/1.2'
+                        bat 'git branch release/1.3'
+                        bat 'git push origin release/1.3'
                         bat 'mvn release:prepare -s -B -Dusername=$USERNAME_VAR -Dpassword=$PASSWORD_VAR'
                         bat 'mvn release:perform -s -B -Dusername=$USERNAME_VAR -Dpassword=$PASSWORD_VAR'
                     //}
