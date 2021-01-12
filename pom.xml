@@ -29,6 +29,13 @@
     </repository>
   </distributionManagement>
 
+  <scm>
+    <connection>scm:git:https://github.com/chaigneauP/projetMaven.git</connection>
+    <url>https://github.com/chaigneauP/projetMaven</url>
+    <developerConnection>scm:git:https://github.com/chaigneauP/projetMaven.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
