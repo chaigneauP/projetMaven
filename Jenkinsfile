@@ -30,7 +30,7 @@ pipeline {
             steps {
                 //withMaven(mavenSettingsConfig: 'maven-config', globalMavenSettingsConfig: 'global-config') {
                     //sh "mvn  -s C:/Users/Paul Chaigneau/.m2/settings.xml deploy"
-                    sh "mvn  -s E:/Documents/apache-maven-3.6.3-bin/apache-maven-3.6.3/confsettings.xml deploy"
+                    sh "mvn  -s E:/Documents/apache-maven-3.6.3-bin/apache-maven-3.6.3/conf/settings.xml deploy"
                 //}
             }
         }
@@ -57,7 +57,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'chaigneauP', passwordVariable: 'PASSWORD_VAR', usernameVariable: 'USERNAME_VAR')]) {
                     //sh "mvn  -s C:/Users/Paul Chaigneau/.m2/settings.xml sonar:sonar -Dsonar.login=admin -Dsonar.password=admin"
-                    sh "mvn  -s E:/Documents/apache-maven-3.6.3-bin/apache-maven-3.6.3/confsettings.xml sonar:sonar -Dsonar.login=admin -Dsonar.password=admin"
+                    sh "mvn  -s E:/Documents/apache-maven-3.6.3-bin/apache-maven-3.6.3/conf/settings.xml sonar:sonar -Dsonar.login=admin -Dsonar.password=admin"
                 }
             }
         }
